@@ -17,7 +17,7 @@
 /* HERO */
 .hero {
   text-align: center;
-  padding: 60px 20px;
+  padding: 85px 20px;
 }
 
 .hero h1 {
@@ -253,6 +253,10 @@
   .job-card {
     background: #fff;
     padding: 10px;
+  }
+
+  .view-all {
+    padding: 5px 15px;
   }
 
   .hero {

@@ -9,6 +9,8 @@ import Company from "./components/Company";
 import JobDetails from "./components/JobDetails";
 import ProfileDetail from "./components/ProfileDetail";
 import Footer from "./pages/Footer";
+import ScrollToTop from "./components/ScrollToTop";
+import ScrollTopButton from "./components/ScrollTopButton";
 
 // Wrapper component to handle page transitions
 function AnimatedRoutes() {
@@ -126,8 +128,10 @@ function App() {
   return (
     <Router>
       <Navbar />
+      <ScrollToTop />
       <AnimatedRoutes />
       <Footer />
+      <ScrollTopButton />
     </Router>
   );
 }
