@@ -10,7 +10,6 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #e5e7eb;
-  font-family: "Segoe UI", sans-serif;
 }
 
 /* LEFT */
@@ -29,8 +28,8 @@
 
 .navbar-center li a {
   text-decoration: none;
-  color: #6b7280;
-  font-size: 15px;
+  color: #333;
+  font-size: 18px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -115,6 +114,7 @@
 
   .navbar-center li a {
     padding: 25px 20px;
+    font-size: 17px;
   }
 
   .navbar-center a.active {
@@ -134,7 +134,7 @@
   }
 
   .hamburger {
-    display: block;
+    display: flex;
   }
 
   .navbar-center {

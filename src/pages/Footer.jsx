@@ -16,9 +16,9 @@ const Footer = () => {
       <div className='footer1'>
         <h1>Quick Links</h1>
         <ul className='fochil2'>
-          <li onClick={() => {navigate("/")}}>Home</li>
-          <li onClick={() => {navigate("/jobs")}}>Browse Jobs</li>
-          <li onClick={() => {navigate("/companies")}}>Companies</li>
+          <li onClick={() => {navigate("/")}}>Home <img src="/assets/sidearrow.png" alt="" /> </li>
+          <li onClick={() => {navigate("/jobs")}}>Browse Jobs <img src="/assets/sidearrow.png" alt="" /> </li>
+          <li onClick={() => {navigate("/companies")}}>Companies <img src="/assets/sidearrow.png" alt="" /> </li>
           {/* <li onClick={() => {navigate("/about")}}>About us</li> */}
         </ul>
       </div>
@@ -35,9 +35,9 @@ const Footer = () => {
           </div>
         </div>
         <div className='fochil5'>
-          <p>Privacy Policy</p>
-          <p>Terms & Condition</p>
-          <p>How Google use Data</p>
+          <p>Privacy Policy <img src="/assets/sidearrow.png" alt="" /></p>
+          <p>Terms & Condition <img src="/assets/sidearrow.png" alt="" /></p>
+          <p>How Google use Data <img src="/assets/sidearrow.png" alt="" /></p>
         </div>
       </div>
     </div>

@@ -42,7 +42,7 @@
 /* Section Headings */
 .footer1 h1 {
     font-size: 20px;
-    margin-bottom: 18px;
+    margin-bottom: 0px;
     font-weight: 600;
 }
 
@@ -55,9 +55,13 @@
 
 .fochil2 li {
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     cursor: pointer;
     color: #333;
+}
+
+.fochil2 li img {
+    height: 12px;
 }
 
 .fochil2 li:hover {
@@ -92,6 +96,10 @@
     color: #333;
 }
 
+.fochil5 p img {
+    height: 12px;
+}
+
 .fochil5 {
     display: flex;
     gap: 10px;
@@ -99,6 +107,7 @@
 
 /* ---------- MOBILE RESPONSIVE ---------- */
 @media (max-width: 768px) {
+
     .fochil3 {
         display: flex;
         flex-direction: column;
@@ -131,6 +140,23 @@
         padding-top: 15px;
         gap: 10px;
     }
+
+    .fochil5 p {
+        font-size: 15px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .fochil2 {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 20px;
+        /* justify-content: space-around; */
+    }
 }
 
 @media (max-width: 480px) {
@@ -140,7 +166,8 @@
 
     .fochil2 li,
     .fochil4 p {
-        font-size: 13px;
+        font-size: 15px;
+        margin-bottom: 0px;
     }
 
     .footer1>p {

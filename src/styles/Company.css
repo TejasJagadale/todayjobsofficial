@@ -113,8 +113,8 @@
 
     .company-gridcy {
         display: grid;
-        grid-template-columns: auto;
-        gap: 24px;
+        grid-template-columns: auto auto;
+        gap: 20px;
     }
 
     .tabscy {
@@ -198,6 +198,14 @@
 
     .tabscy button {
         font-size: 15px;
+    }
+}
+
+@media (max-width: 450px) {
+    .company-gridcy {
+        display: grid;
+        grid-template-columns: auto;
+        gap: 24px;
     }
 }
 

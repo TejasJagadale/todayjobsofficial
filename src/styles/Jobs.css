@@ -1,7 +1,6 @@
 .jobs-pagejd {
   background: #f6f9ff;
   padding-bottom: 60px;
-  font-family: "Segoe UI", sans-serif;
 }
 
 .jobs-herojd {
@@ -150,8 +149,9 @@
   }
 
   .jobs-gridjd {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto auto;
     padding: 0 10px;
+    gap: 20px;
   }
 
   .search-box {
@@ -165,5 +165,13 @@
 
   .jobs-herojd h1 {
     font-size: 30px;
+  }
+}
+
+@media (max-width: 450px) {
+  .jobs-gridjd {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 20px;
   }
 }

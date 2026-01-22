@@ -1,11 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .job-home {
-  font-family: "Segoe UI", sans-serif;
   background: #f8faff;
   color: #1e1e1e;
 }
@@ -194,7 +187,7 @@
 }
 
 .company {
-  font-size: 13px;
+  font-size: 16px;
   color: #6b7280;
 }
 
@@ -283,6 +276,14 @@
   }
 
   .jobs-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 450px) {
+  .jobs-grid {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 24px;
   }
 }

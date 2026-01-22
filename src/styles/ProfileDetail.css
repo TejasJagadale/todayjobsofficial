@@ -1,28 +1,9 @@
-/* ===============================
-   GLOBAL
-================================ */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background: #f5f7fb;
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont;
-  color: #1f2937;
-}
-
-/* ===============================
-   PAGE CONTAINER
-================================ */
 .profile-pagepd {
   max-width: 1200px;
   margin: 30px auto;
   padding: 0 20px;
 }
 
-/* ===============================
-   TOP PROFILE CARD
-================================ */
 .profile-headerpd {
   display: flex;
   align-items: center;
@@ -60,9 +41,6 @@ body {
   color: #6b7280;
 }
 
-/* ===============================
-   MAIN LAYOUT
-================================ */
 .profile-contentpd {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -70,9 +48,6 @@ body {
   margin-top: 24px;
 }
 
-/* ===============================
-   SIDEBAR
-================================ */
 .profile-sidebarpd {
   background: #ffffff;
   padding: 16px;
@@ -116,9 +91,6 @@ body {
   color: #ffffff;
 }
 
-/* ===============================
-   PERSONAL DETAILS CARD
-================================ */
 .profile-mainpd {
   width: 100%;
 }
@@ -156,9 +128,6 @@ body {
   background: #f1f5f9;
 }
 
-/* ===============================
-   FORM GRID
-================================ */
 .details-cardpd .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -193,9 +162,6 @@ body {
   grid-column: span 2;
 }
 
-/* ===============================
-   SAVED JOBS
-================================ */
 .saved-jobspd {
   display: flex;
   flex-direction: column;
@@ -228,9 +194,6 @@ body {
   color: #4b5563;
 }
 
-/* ===============================
-   EMPTY STATE
-================================ */
 .saved-jobspd p {
   font-size: 14px;
   color: #6b7280;
@@ -248,9 +211,6 @@ body {
   object-fit: contain;
 }
 
-/* ===============================
-   RESPONSIVE
-================================ */
 @media (max-width: 900px) {
   .profile-contentpd {
     grid-template-columns: 1fr;
