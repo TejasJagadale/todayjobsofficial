@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "../styles/Home.css";
 import { useNavigate } from "react-router-dom";
 import jobsData from "../data/jobsData";
@@ -10,7 +11,30 @@ const stats = [
 ];
 
 const Home = () => {
+  const [savedJobs, setSavedJobs] = useState([]);
   const navigate = useNavigate();
+
+  /* LOAD SAVED JOBS */
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("savedJobs")) || [];
+    setSavedJobs(stored);
+  }, []);
+
+  /* SAVE / UNSAVE */
+  const toggleSave = (job) => {
+    let updated;
+
+    if (savedJobs.find((j) => j.id === job.id)) {
+      updated = savedJobs.filter((j) => j.id !== job.id);
+    } else {
+      updated = [...savedJobs, job];
+    }
+
+    setSavedJobs(updated);
+    localStorage.setItem("savedJobs", JSON.stringify(updated));
+  };
+
+  const isSaved = (id) => savedJobs.some((job) => job.id === id);
   return (
     <div className="job-home">
       <section className="hero">
@@ -77,10 +101,21 @@ const Home = () => {
         <div className="jobs-grid">
           {jobsData.map((job) => (
             <div className="job-card" key={job.id}>
-              <div className="job-cardimgsec">
+              {/* <div className="job-cardimgsec">
                 <img className="cardimgsec" src={job.img} alt="" />
                 <h4>{job.title}</h4>
                 <img src="/assets/Group 101.png" className="saveit" alt="" />
+              </div> */}
+              <div className="job-cardimgsec">
+                <img className="cardimgsec" src="/assets/logomp.png" alt="" />
+                <h4>{job.title}</h4>
+                {/* SAVE ICON */}
+                <div
+                  className={`savejd ${isSaved(job.id) ? "saved" : ""}`}
+                  onClick={() => toggleSave(job)}
+                >
+                  <img src="/assets/sawed.png" className="saveit" alt="" />
+                </div>
               </div>
               <p className="company">{job.company}</p>
 
