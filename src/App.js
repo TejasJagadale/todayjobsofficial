@@ -11,6 +11,7 @@ import ProfileDetail from "./components/ProfileDetail";
 import Footer from "./pages/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollTopButton from "./components/ScrollTopButton";
+import Resetpassword from "./components/Resetpassword";
 
 // Wrapper component to handle page transitions
 function AnimatedRoutes() {
@@ -116,6 +117,20 @@ function AnimatedRoutes() {
               exit="exit"
             >
               <ProfileDetail />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/reset-password"
+          element={
+            <motion.div
+              key="profile"
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
+              <Resetpassword />
             </motion.div>
           }
         />

@@ -73,10 +73,10 @@ const JobDetails = () => {
           </div>
 
           <div className="je1">
-            <button className="save-btn">
+            {/* <button className="save-btn">
               {job.is_saved ? "Saved" : "Save"}
-            </button>
-            <button className="apply-btn">Apply Now</button>
+            </button> */}
+            <a href={job.apply_now_url} className="apply-btn">Apply Now</a>
           </div>
         </div>
       </div>
