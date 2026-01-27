@@ -136,7 +136,7 @@ const Home = () => {
 
         <div className="jobs-grid">
           {jobs.map((job) => (
-            <div className="job-card" key={job.id}>
+            <div className="job-card" key={job.id} onClick={() => navigate(`/jobsdetails/${job.id}`)}>
               <div className="job-cardimgsec">
                 <img className="cardimgsec" src="/assets/logomp.png" alt="" />
                 <h4>{job.role}</h4>
@@ -172,12 +172,12 @@ const Home = () => {
                   ))}
               </div>
 
-              <button
+              <a
                 className="apply-btn"
-                onClick={() => navigate(`/jobsdetails/${job.id}`)}
+                href={job.apply_now_url}
               >
                 Apply Now
-              </button>
+              </a>
             </div>
           ))}
         </div>
