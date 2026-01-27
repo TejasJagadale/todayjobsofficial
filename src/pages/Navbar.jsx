@@ -49,11 +49,12 @@ const Navbar = () => {
           <FiBell />
         </button>
 
-        {user?.profile_image && (
-          <div className="profile" onClick={() => navigate("/profile")}>
-            <img src={user.profile_image} alt="profile" />
-          </div>
-        )}
+        <div className="profile" onClick={() => navigate("/profile")}>
+          <img
+            src={user?.profile_image || "/assets/login/lap.png"}
+            alt="profile"
+          />
+        </div>
 
         {/* Hamburger */}
         <button
