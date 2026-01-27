@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -11,144 +17,165 @@ import ProfileDetail from "./components/ProfileDetail";
 import Footer from "./pages/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollTopButton from "./components/ScrollTopButton";
-import Resetpassword from "./components/Resetpassword";
 
-// Wrapper component to handle page transitions
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import ForgotPassword from "./components/auth/ForgotPassword";
+import ResetPassword from "./components/auth/ResetPassword";
+
+/* =========================
+   AUTH CHECK
+========================= */
+const isAuthenticated = () =>
+  localStorage.getItem("isLoggedIn") === "true";
+
+/* =========================
+   ANIMATED ROUTES
+========================= */
 function AnimatedRoutes() {
   const location = useLocation();
-  const [isFirstMount, setIsFirstMount] = useState(true);
-
-  useEffect(() => {
-    if (isFirstMount) {
-      setIsFirstMount(false);
-    }
-  }, [isFirstMount]);
+  const isAuth = isAuthenticated();
 
   const pageVariants = {
-    initial: {
-      opacity: 0,
-      y: 20,
-    },
+    initial: { opacity: 0, y: 20 },
     animate: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.4,
-        ease: [0.25, 0.1, 0.25, 1], // Smooth easing
-      },
+      transition: { duration: 0.4 },
     },
     exit: {
       opacity: 0,
       y: -20,
-      transition: {
-        duration: 0.3,
-        ease: [0.25, 0.1, 0.25, 1],
-      },
+      transition: { duration: 0.3 },
     },
   };
 
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
+        {/* DEFAULT ENTRY */}
         <Route
           path="/"
           element={
-            <motion.div
-              key="home"
-              variants={pageVariants}
-              initial={isFirstMount ? "animate" : "initial"}
-              animate="animate"
-              exit="exit"
-            >
-              <Home />
-            </motion.div>
+            isAuth ? <Navigate to="/home" /> : <Navigate to="/login" />
           }
         />
+
+        {/* AUTH ROUTES */}
         <Route
-          path="/jobs"
+          path="/login"
           element={
-            <motion.div
-              key="jobs"
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              <Jobs />
-            </motion.div>
+            isAuth ? (
+              <Navigate to="/home" />
+            ) : (
+              <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit">
+                <Login />
+              </motion.div>
+            )
           }
         />
+
         <Route
-          path="/companies"
+          path="/register"
           element={
-            <motion.div
-              key="companies"
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              <Company />
-            </motion.div>
+            isAuth ? (
+              <Navigate to="/home" />
+            ) : (
+              <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit">
+                <Register />
+              </motion.div>
+            )
           }
         />
+
         <Route
-          path="/jobsdetails/:id"
+          path="/forgot-password"
           element={
-            <motion.div
-              key="jobdetails"
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              <JobDetails />
+            <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit">
+              <ForgotPassword />
             </motion.div>
           }
         />
-        <Route
-          path="/profile"
-          element={
-            <motion.div
-              key="profile"
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              <ProfileDetail />
-            </motion.div>
-          }
-        />
+
         <Route
           path="/reset-password"
           element={
-            <motion.div
-              key="profile"
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              <Resetpassword />
+            <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit">
+              <ResetPassword />
             </motion.div>
           }
+        />
+
+        {/* PROTECTED ROUTES */}
+        <Route
+          path="/home"
+          element={
+            isAuth ? (
+              <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit">
+                <Home />
+              </motion.div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+
+        <Route
+          path="/jobs"
+          element={isAuth ? <Jobs /> : <Navigate to="/login" />}
+        />
+
+        <Route
+          path="/companies"
+          element={isAuth ? <Company /> : <Navigate to="/login" />}
+        />
+
+        <Route
+          path="/jobsdetails/:id"
+          element={isAuth ? <JobDetails /> : <Navigate to="/login" />}
+        />
+
+        <Route
+          path="/profile"
+          element={isAuth ? <ProfileDetail /> : <Navigate to="/login" />}
         />
       </Routes>
     </AnimatePresence>
   );
 }
 
+/* =========================
+   MAIN APP
+========================= */
 function App() {
+  const location = useLocation();
+
+  const hideLayout =
+    location.pathname === "/login" ||
+    location.pathname === "/register" ||
+    location.pathname === "/forgot-password" ||
+    location.pathname === "/reset-password";
+
   return (
-    <Router>
-      <Navbar />
+    <>
+      {!hideLayout && <Navbar />}
       <ScrollToTop />
+
       <AnimatedRoutes />
-      <Footer />
-      <ScrollTopButton />
-    </Router>
+
+      {!hideLayout && <Footer />}
+      {!hideLayout && <ScrollTopButton />}
+    </>
   );
 }
 
-export default App;
+/* =========================
+   ROUTER WRAPPER
+========================= */
+export default function AppWrapper() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
