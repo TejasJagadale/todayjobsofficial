@@ -21,6 +21,8 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ResetPassword from "./components/auth/ResetPassword";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import TermsConditions from "./components/TermsConditions";
 
 /* =========================
    AUTH CHECK
@@ -137,6 +139,16 @@ function AnimatedRoutes() {
         <Route
           path="/profile"
           element={isAuth ? <ProfileDetail /> : <Navigate to="/login" />}
+        />
+
+        <Route
+          path="/privacypolicy"
+          element={isAuth ? <PrivacyPolicy /> : <Navigate to="/login" />}
+        />
+
+        <Route
+          path="/termsandcondition"
+          element={isAuth ? <TermsConditions /> : <Navigate to="/login" />}
         />
       </Routes>
     </AnimatePresence>

@@ -35,9 +35,9 @@ const Footer = () => {
           </div>
         </div>
         <div className='fochil5'>
-          <p>Privacy Policy <img src="/assets/sidearrow.png" alt="" /></p>
-          <p>Terms & Condition <img src="/assets/sidearrow.png" alt="" /></p>
-          <p>How Google use Data <img src="/assets/sidearrow.png" alt="" /></p>
+          <a href='/privacypolicy'>Privacy Policy <img src="/assets/sidearrow.png" alt="" /></a>
+          <a href='/termsandcondition'>Terms & Condition <img src="/assets/sidearrow.png" alt="" /></a>
+          {/* <a href='/privacypolicy'>How Google use Data <img src="/assets/sidearrow.png" alt="" /></a> */}
         </div>
       </div>
     </div>
