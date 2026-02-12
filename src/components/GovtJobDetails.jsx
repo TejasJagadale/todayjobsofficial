@@ -482,7 +482,7 @@ const GovtJobDetails = () => {
                 {jobDetails.related_jobs && jobDetails.related_jobs.length > 0 && (
                     <div className="related-jobs-sectiongovd card">
                         <h3>🔍 Related Jobs</h3>
-                        <div className="related-jobs-grid">
+                        <div className="related-jobs-gridgovd">
                             {jobDetails.related_jobs.slice(0, 4).map((job, index) => (
                                 <a
                                     key={index}

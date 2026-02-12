@@ -1,0 +1,178 @@
+{
+  "conversion_metadata": {
+    "converted_at": "2026-02-12T09:41:13.091Z",
+    "source_file": "detail16.html"
+  },
+  "title": "10வது படித்தவர்களுக்கு பெடரல் வங்கியில் அலுவலக உதவியாளர் வேலை – சம்பளம்: ரூ.19,500 முதல் ரூ.37,815 வரை Federal Bank Office Assistant Recruitment 2026",
+  "description": "Federal Bank Office Assistant Recruitment 2026: பெடரல் வங்கியில் (Federal Bank) காலியாக உள்ள பல்வேறு அலுவலக உதவியாளர் (Office Assistant) பணியிடங்களை நிரப்புவதற்கான புதிய அறிவிப்பு தற்போது வெளியாகியுள்ளது. வங்கித்துறையில் பணியாற்ற விரும்பும் தகுதியுள்ள விண்ணப்பதாரர்கள், இந்த நல்வாய்ப்பைப் பயன்படுத்தி 08.01.2026-க்குள் ஆன்லைன் (Online) வழியாக விண்ணப்பிக்க வேண்டும். இந்தப் பணியிடங்களுக்கான கல்வித் தகுதி, வயது வரம்பு, விண்ணப்பிக்கும் முறை மற்றும் பிற முக்கிய விவரங்களை கீழே விரிவாகக் காணலாம்.",
+  "job_details_table": {
+    "description": {
+      "label": "Description",
+      "value": "Details",
+      "link": null,
+      "link_text": null
+    },
+    "field_bzwm9": {
+      "label": "துறைகள்",
+      "value": "Federal Bankபெடரல் வங்கி",
+      "link": null,
+      "link_text": null
+    },
+    "field_ebixc": {
+      "label": "காலியிடங்கள்",
+      "value": "பல்வேறு",
+      "link": null,
+      "link_text": null
+    },
+    "field_gr0rb": {
+      "label": "பணி",
+      "value": "அலுவலக உதவியாளர் (Office Assistant)",
+      "link": null,
+      "link_text": null
+    },
+    "field_4str9": {
+      "label": "விண்ணப்பிக்கும் முறை",
+      "value": "ஆன்லைன் மூலம்",
+      "link": null,
+      "link_text": null
+    },
+    "field_zi08m": {
+      "label": "கடைசி தேதி",
+      "value": "08.01.2026",
+      "link": null,
+      "link_text": null
+    },
+    "field_6wr4l": {
+      "label": "பணியிடம்",
+      "value": "இந்தியா முழுவதும்",
+      "link": null,
+      "link_text": null
+    },
+    "field_msxmg": {
+      "label": "அதிகாரப்பூர்வஇணையதளம்",
+      "value": "https://www.federalbank.co.in/career",
+      "link": null,
+      "link_text": null
+    }
+  },
+  "positions_table": [
+    {
+      "position": "பதவியின் பெயர்",
+      "vacancies": "காலியிடங்கள்",
+      "position_type": "General"
+    },
+    {
+      "position": "அலுவலக உதவியாளர் (Office Assistant)",
+      "vacancies": "பல்வேறு",
+      "position_type": "Support Staff"
+    }
+  ],
+  "qualifications_table": [],
+  "salary_table": [],
+  "application_links_table": {
+    "official_notification": null,
+    "application_form": null,
+    "official_website": {
+      "label": "அதிகாரப்பூர்வஇணையதளம்",
+      "url": null,
+      "text": "https://www.federalbank.co.in/career"
+    }
+  },
+  "age_limit": {
+    "full_text": "ஆதிதிராவிடர் / பழங்குடியினர் (SC / ST): 18 முதல் 25\n                    வயது வரை.\n                \n\n                இதர பிரிவினர் (Others): 18 முதல் 20 வயது வரை.",
+    "min_age": "25",
+    "max_age": null,
+    "condition": null
+  },
+  "selection_process": {
+    "description": "பெடரல் வங்கி வேலைவாய்ப்பு 2026 பணிக்கு தகுதியான விண்ணப்பதாரர்கள் பின்வரும் செயல்முறைகளின் அடிப்படையில் தேர்வு செய்யப்படுவார்கள்: Online Aptitude Test Personal Interview",
+    "based_on": "Merit"
+  },
+  "application_fee": {
+    "description": "ஆதிதிராவிடர் / பழங்குடியினர் (SC / ST): ரூ. 100/-\n\n                இதர பிரிவினர் (Others): ரூ. 500/-\n             \n                .group-card {\n                    margin-bottom: 20px;\n                    position: relative;\n                    border: 2px solid transparent;\n                    border-radius: 5px;\n                    background: #f0f8ff;\n                    display: flex;\n                    align-items: center;\n                    padding: 7px;\n                    justify-content: space-between;\n                    overflow: hidden;\n                }\n\n                .job-card {\n                    animation: job-border-animation 1s infinite;\n                }\n\n                @keyframes job-border-animation {\n                    0% {\n                        border-color: transparent;\n                    }\n\n                    50% {\n                        border-color: #039600;\n                    }\n\n                    100% {\n                        border-color: transparent;\n                    }\n                }\n\n                .seoquake-nofollow {\n                    display: inline-flex;\n                    align-items: center;\n                    justify-content: center;\n                    font-size: 1rem;\n                    font-weight: bold;\n                    text-decoration: none;\n                    padding: 5px 20px;\n                    border-radius: 2px;\n                    flex-shrink: 0;\n                    transition: all 0.3s ease-in-out;\n                    color: white !important;\n                }\n\n                .seoquake-nofollow i {\n                    margin-right: 5px;\n                }\n\n                .job-card .seoquake-nofollow {\n                    background: #039600;\n                }\n\n                .seoquake-nofollow:hover {\n                    transform: scale(1.05);\n                }",
+    "is_free": false,
+    "amount": 100,
+    "currency": "INR"
+  },
+  "important_dates": {
+    "start_date": null,
+    "last_date": null,
+    "other_dates": []
+  },
+  "how_to_apply": {
+    "instructions": "",
+    "postal_address": null,
+    "website_url": null,
+    "application_mode": "Not specified"
+  },
+  "social_media_links": [
+    {
+      "platform": "unknown",
+      "title": "இன்றைய வேலைவாய்ப்பு செய்திகள்",
+      "url": "https://todaytamiljob.com/",
+      "is_nofollow": false,
+      "is_external": false
+    },
+    {
+      "platform": "WhatsApp",
+      "title": "WhatsApp Channel",
+      "url": "https://whatsapp.com/channel/0029Va4ZViAKAwEffGhQKZ15",
+      "is_nofollow": true,
+      "is_external": true
+    },
+    {
+      "platform": "Telegram",
+      "title": "Telegram Channel",
+      "url": "https://t.me/tamil_job_news",
+      "is_nofollow": true,
+      "is_external": true
+    },
+    {
+      "platform": "Instagram",
+      "title": "Instagram Channel",
+      "url": "https://www.instagram.com/j/AbZ7GMxmLcv2_Gac/",
+      "is_nofollow": true,
+      "is_external": true
+    }
+  ],
+  "related_jobs": [
+    {
+      "title": "10th,12th,ITI முடித்தவர்களுக்கு இந்திய இராணுவத்தில்வேலை – ரூ.19,900 முதல் ரூ.63,200 வரை சம்பளம்! Indian Army EME Recruitment 2026",
+      "url": "https://todaytamiljob.com/indian-army-eme-recruitment-2026/",
+      "image": "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20100'%3E%3C/svg%3E"
+    },
+    {
+      "title": "10வது பாஸ்…தமிழ்நாடு செய்தி மக்கள் தொடர்பு துறையில் வேலை – மாதம் ரூ.24,200 சம்பளம் || தேர்வு கிடையாது! TN DIPR Recruitment 2026",
+      "url": "https://todaytamiljob.com/tn-dipr-recruitment-2026/",
+      "image": "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20100'%3E%3C/svg%3E"
+    },
+    {
+      "title": "10வது முடித்தவர்களுக்கு தமிழ்நாடு அரசு உதவி பெரும் பெரியார் நூற்றாண்டு பாலிடெக்னிக் கல்லூரியில் இளநிலை உதவியாளர் வேலை – சம்பளம்: ரூ.19,500/- Periyar Centenary Polytechnic College Recruitment 2026",
+      "url": "https://todaytamiljob.com/periyar-centenary-polytechnic-college-recruitment-2026/",
+      "image": "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20100'%3E%3C/svg%3E"
+    },
+    {
+      "title": "10வது தேர்ச்சி! ரயில்வே துறை குரூப் D வேலைவாய்ப்பு 2026 – 22195 காலிப்பணியிடங்கள்; ரூ.18,000 சம்பளம் || உடனே விண்ணப்பிக்கவும் RRB Group D Recruitment 2026",
+      "url": "https://todaytamiljob.com/rrb-group-d-recruitment-2026/",
+      "image": "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20100'%3E%3C/svg%3E"
+    },
+    {
+      "title": "தமிழ்நாடு போஸ்ட் ஆபீஸ் வேலைவாய்ப்பு 2026 – 2019 காலியிடங்கள்; 10வது முடித்தவர்கள் விண்ணப்பிக்கலாம்! TN Post Office GDS Recruitment 2026",
+      "url": "https://todaytamiljob.com/tn-post-office-gds-recruitment-2026/",
+      "image": "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20100'%3E%3C/svg%3E"
+    }
+  ],
+  "metadata": {
+    "author": "Guna",
+    "published_date": "January 1, 2026",
+    "post_id": "8278",
+    "categories": [
+      "10th-pass-govt-jobs"
+    ],
+    "tags": [
+      "federal-bank-office-assistant-recruitment-2026",
+      "federal-bank-recruitment-2026"
+    ],
+    "published_datetime": null
+  }
+}

@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Govtjobs.css';
-// import thedata from "../data/alljson.json";
 
 const Govtjobs = () => {
-    const [jobData, setJobData] = useState(null);
+    // State for current active tab
+    const [activeTab, setActiveTab] = useState('TN Govt Jobs');
+    
+    // State for each job category data
+    const [tnGovtJobs, setTnGovtJobs] = useState(null);
+    const [centralGovtJobs, setCentralGovtJobs] = useState(null);
+    const [pass12Jobs, setPass12Jobs] = useState(null);
+    const [pass10Jobs, setPass10Jobs] = useState(null);
+    const [degreeJobs, setDegreeJobs] = useState(null);
+    const [diplomaJobs, setDiplomaJobs] = useState(null);
+    const [itiJobs, setItiJobs] = useState(null);
+    
+    // Common states
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [filteredJobs, setFilteredJobs] = useState([]);
@@ -14,40 +25,129 @@ const Govtjobs = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const jobsPerPage = 10;
 
-    // Load JSON data
+    // Tab configuration
+    const tabs = [
+        { id: 'TN Govt Jobs', label: '🎯 TN Govt Jobs', jsonFile: 'alljson.json' },
+        { id: '12TH PASS Govt Jobs', label: '📚 12th Pass Jobs', jsonFile: '12th_pass_jobs.json' },
+        { id: '10TH PASS Govt Jobs', label: '📖 10th Pass Jobs', jsonFile: '10th_pass_jobs.json' },
+        { id: 'CENTRAL GOVT JOBS', label: '🏛️ Central Govt Jobs', jsonFile: 'central_govt_jobs.json' },
+        { id: 'ANY DEGREE GOVT JOBS', label: '🎓 Any Degree Jobs', jsonFile: 'degree_jobs.json' },
+        { id: 'DIPLOMA GOVT JOBS', label: '🔧 Diploma Jobs', jsonFile: 'diploma_jobs.json' },
+        { id: 'ITI GOV JOBS', label: '🛠️ ITI Jobs', jsonFile: 'iti_jobs.json' }
+    ];
+
+    // Function to get current job data based on active tab
+    const getCurrentJobData = () => {
+        switch(activeTab) {
+            case 'TN Govt Jobs':
+                return tnGovtJobs;
+            case '12TH PASS Govt Jobs':
+                return pass12Jobs;
+            case '10TH PASS Govt Jobs':
+                return pass10Jobs;
+            case 'CENTRAL GOVT JOBS':
+                return centralGovtJobs;
+            case 'ANY DEGREE GOVT JOBS':
+                return degreeJobs;
+            case 'DIPLOMA GOVT JOBS':
+                return diplomaJobs;
+            case 'ITI GOV JOBS':
+                return itiJobs;
+            default:
+                return tnGovtJobs;
+        }
+    };
+
+    // Function to set job data for specific tab
+    const setJobDataForTab = (tabId, data) => {
+        switch(tabId) {
+            case 'TN Govt Jobs':
+                setTnGovtJobs(data);
+                break;
+            case '12TH PASS Govt Jobs':
+                setPass12Jobs(data);
+                break;
+            case '10TH PASS Govt Jobs':
+                setPass10Jobs(data);
+                break;
+            case 'CENTRAL GOVT JOBS':
+                setCentralGovtJobs(data);
+                break;
+            case 'ANY DEGREE GOVT JOBS':
+                setDegreeJobs(data);
+                break;
+            case 'DIPLOMA GOVT JOBS':
+                setDiplomaJobs(data);
+                break;
+            case 'ITI GOV JOBS':
+                setItiJobs(data);
+                break;
+            default:
+                break;
+        }
+    };
+
+    // Load JSON data for all tabs
     useEffect(() => {
-        const fetchJobs = async () => {
+        const fetchAllJobs = async () => {
             try {
                 setLoading(true);
+                setError(null);
 
-                const data = await import("../data/alljson.json"); // MUST be a string path
-                const json = data.default;
+                // Load all JSON files in parallel
+                const jobPromises = tabs.map(tab => 
+                    import(`../data/${tab.jsonFile}`)
+                        .then(module => ({ tabId: tab.id, data: module.default }))
+                        .catch(err => {
+                            console.error(`Error loading ${tab.jsonFile}:`, err);
+                            return { tabId: tab.id, data: { jobs: [], metadata: {} } };
+                        })
+                );
 
-                setJobData(json);
-                setFilteredJobs(json.jobs || []);
+                const results = await Promise.all(jobPromises);
+                
+                // Set data for each tab
+                results.forEach(result => {
+                    setJobDataForTab(result.tabId, result.data);
+                });
 
+                setLoading(false);
             } catch (err) {
                 console.error("Error loading jobs:", err);
                 setError("Failed to load job data.");
-            } finally {
                 setLoading(false);
             }
         };
 
-        fetchJobs();
+        fetchAllJobs();
     }, []);
+
+    // Update filtered jobs when active tab changes or any job data updates
+    useEffect(() => {
+        const currentData = getCurrentJobData();
+        if (currentData?.jobs) {
+            setFilteredJobs(currentData.jobs);
+        } else {
+            setFilteredJobs([]);
+        }
+        setCurrentPage(1);
+        setSearchTerm('');
+        setSelectedCategory('All');
+        setSelectedQualification('All');
+    }, [activeTab, tnGovtJobs, pass12Jobs, pass10Jobs, centralGovtJobs, degreeJobs, diplomaJobs, itiJobs]);
 
     // Filter jobs based on search, category, and qualification
     useEffect(() => {
-        if (!jobData?.jobs) return;
+        const currentData = getCurrentJobData();
+        if (!currentData?.jobs) return;
 
-        let filtered = [...jobData.jobs];
+        let filtered = [...currentData.jobs];
 
         // Apply search filter
         if (searchTerm) {
             filtered = filtered.filter(job =>
-                job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                job.categories.some(cat => cat.toLowerCase().includes(searchTerm.toLowerCase())) ||
+                job.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                job.categories?.some(cat => cat.toLowerCase().includes(searchTerm.toLowerCase())) ||
                 (job.tags && job.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())))
             );
         }
@@ -68,7 +168,8 @@ const Govtjobs = () => {
 
         setFilteredJobs(filtered);
         setCurrentPage(1);
-    }, [searchTerm, selectedCategory, selectedQualification, jobData]);
+    }, [searchTerm, selectedCategory, selectedQualification, activeTab, 
+        tnGovtJobs, pass12Jobs, pass10Jobs, centralGovtJobs, degreeJobs, diplomaJobs, itiJobs]);
 
     // Get current page jobs
     const indexOfLastJob = currentPage * jobsPerPage;
@@ -76,11 +177,12 @@ const Govtjobs = () => {
     const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
     const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
 
-    // Extract unique categories and qualifications for filters
+    // Extract unique categories and qualifications for current tab
     const getUniqueCategories = () => {
-        if (!jobData?.jobs) return ['All'];
+        const currentData = getCurrentJobData();
+        if (!currentData?.jobs) return ['All'];
         const categories = new Set();
-        jobData.jobs.forEach(job => {
+        currentData.jobs.forEach(job => {
             if (job.categories) {
                 job.categories.forEach(cat => categories.add(cat));
             }
@@ -89,9 +191,10 @@ const Govtjobs = () => {
     };
 
     const getUniqueQualifications = () => {
-        if (!jobData?.jobs) return ['All'];
+        const currentData = getCurrentJobData();
+        if (!currentData?.jobs) return ['All'];
         const qualifications = new Set();
-        jobData.jobs.forEach(job => {
+        currentData.jobs.forEach(job => {
             if (job.details?.qualification && job.details.qualification !== 'Not specified') {
                 qualifications.add(job.details.qualification);
             }
@@ -109,6 +212,12 @@ const Govtjobs = () => {
     const formatDate = (dateString) => {
         if (!dateString) return 'Date not available';
         return dateString.replace(/\n/g, '').trim();
+    };
+
+    // Get current tab metadata
+    const getCurrentMetadata = () => {
+        const currentData = getCurrentJobData();
+        return currentData?.metadata || {};
     };
 
     if (loading) {
@@ -132,199 +241,191 @@ const Govtjobs = () => {
         );
     }
 
-    if (!jobData || !jobData.jobs || jobData.jobs.length === 0) {
-        return (
-            <div className="jobs-empty">
-                <h2>No Jobs Available</h2>
-                <p>Check back later for new government job opportunities.</p>
-            </div>
-        );
-    }
-
+    const currentData = getCurrentJobData();
+    const currentMetadata = getCurrentMetadata();
     const uniqueCategories = getUniqueCategories();
     const uniqueQualifications = getUniqueQualifications();
 
     return (
         <div className="govt-jobs-containergov">
+            {/* Tabs Navigation */}
+            <div className="tabs-containergov">
+                <div className="tabs-headergov">
+                    {tabs.map(tab => (
+                        <button
+                            key={tab.id}
+                            className={`tab-btngov ${activeTab === tab.id ? 'active' : ''}`}
+                            onClick={() => setActiveTab(tab.id)}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
             {/* Header Section */}
             <div className="jobs-headergov">
                 <div className="header-titlegov">
-                    <h1>🎯 Tamil Nadu Government Jobs</h1>
+                    <h1>{tabs.find(tab => tab.id === activeTab)?.label}</h1>
                     <p className="job-statsgov">
-                        <span className="total-jobsgov">{filteredJobs.length} Jobs Available</span>
+                        <span className="total-jobsgov">
+                            {filteredJobs.length} Jobs Available
+                        </span>
                         <span className="update-dategov">
-                            Last Updated: {jobData.metadata?.exportDate ? new Date(jobData.metadata.exportDate).toLocaleDateString('en-IN') : 'Today'}
+                            Last Updated: {currentMetadata?.exportDate ? 
+                                new Date(currentMetadata.exportDate).toLocaleDateString('en-IN') : 
+                                'Today'}
                         </span>
                     </p>
                 </div>
 
-                {/* Search and Filter Section */}
-                <div className="filter-sectiongov">
-                    <div className="search-boxgov">
-                        <input
-                            type="text"
-                            placeholder="🔍 Search jobs, categories, or tags..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="search-inputgov"
-                        />
-                    </div>
-
-                    <div className="filter-controlsgov">
-                        <div className="filter-groupgov">
-                            <label>Category:</label>
-                            <select
-                                value={selectedCategory}
-                                onChange={(e) => setSelectedCategory(e.target.value)}
-                                className="filter-selectgov"
-                            >
-                                {uniqueCategories.map(category => (
-                                    <option key={category} value={category}>{category}</option>
-                                ))}
-                            </select>
+                {/* Search and Filter Section - Only show if jobs exist */}
+                {currentData?.jobs?.length > 0 && (
+                    <div className="filter-sectiongov">
+                        <div className="search-boxgov">
+                            <input
+                                type="text"
+                                placeholder="🔍 Search jobs, categories, or tags..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="search-inputgov"
+                            />
                         </div>
 
-                        <div className="filter-groupgov">
-                            <label>Qualification:</label>
-                            <select
-                                value={selectedQualification}
-                                onChange={(e) => setSelectedQualification(e.target.value)}
-                                className="filter-selectgov"
-                            >
-                                {uniqueQualifications.map(qual => (
-                                    <option key={qual} value={qual}>{qual}</option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <button
-                            className="reset-btngov"
-                            onClick={() => {
-                                setSearchTerm('');
-                                setSelectedCategory('All');
-                                setSelectedQualification('All');
-                            }}
-                        >
-                            Reset Filters
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* Stats Summary */}
-            {/* {jobData.metadata?.summary && (
-                <div className="stats-summarygov">
-                    <div className="stat-cardgov">
-                        <span className="stat-valuegov">{jobData.metadata.summary.totalJobs || jobData.jobs.length}</span>
-                        <span className="stat-labelgov">Total Jobs</span>
-                    </div>
-                    <div className="stat-cardgov">
-                        <span className="stat-valuegov">{Object.keys(jobData.metadata.summary.categories || {}).length}</span>
-                        <span className="stat-labelgov">Categories</span>
-                    </div>
-                    <div className="stat-cardgov">
-                        <span className="stat-valuegov">{Object.keys(jobData.metadata.summary.qualifications || {}).length}</span>
-                        <span className="stat-labelgov">Qualifications</span>
-                    </div>
-                    <div className="stat-cardgov">
-                        <span className="stat-valuegov">💼</span>
-                        <span className="stat-labelgov">Govt Jobs</span>
-                    </div>
-                </div>
-            )} */}
-
-            {/* Jobs Grid */}
-            <div className="jobs-gridgov">
-                {currentJobs.length > 0 ? (
-                    currentJobs.map((job) => (
-                        <div key={job.id} className="job-cardgov">
-                            {job.image?.url && (
-                                <div className="job-imagegov">
-                                    <img
-                                        src={job.image.url}
-                                        alt={job.image.alt || job.title}
-                                        loading="lazy"
-                                        onError={(e) => {
-                                            e.target.src = 'https://via.placeholder.com/300x200?text=No+Image';
-                                        }}
-                                    />
-                                    {job.details?.noExamRequired && (
-                                        <span className="badgegov no-examgov">📝 No Exam</span>
-                                    )}
-                                </div>
-                            )}
-
-                            <div className="job-contentgov">
-                                <h2 className="job-titlegov">
-                                    <Link to={`/job/${job.id}`}>
-                                        {job.title.replace(/\n/g, ' ')}
-                                    </Link>
-                                </h2>
-
-                                <div className="job-metagov">
-                                    <span className="meta-itemgov">
-                                        <span className="meta-icongov">📅</span>
-                                        {formatDate(job.metadata?.publishedDate)}
-                                    </span>
-                                    <span className="meta-itemgov">
-                                        <span className="meta-icongov">👤</span>
-                                        {job.metadata?.author}
-                                    </span>
-                                </div>
-
-                                <div className="job-detailsgov">
-                                    <div className="detail-itemgov">
-                                        <span className="detail-labelgov">💰 Salary:</span>
-                                        <span className="detail-value salarygov">
-                                            {formatSalary(job.details?.salary)}
-                                        </span>
-                                    </div>
-
-                                    <div className="detail-itemgov">
-                                        <span className="detail-labelgov">📚 Qualification:</span>
-                                        <span className="detail-value qualificationgov">
-                                            {job.details?.qualification}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div className="job-categoriesgov">
-                                    {job.categories && job.categories.map((category, index) => (
-                                        <span
-                                            key={index}
-                                            className="category-taggov"
-                                            onClick={() => setSelectedCategory(category)}
-                                        >
-                                            {category}
-                                        </span>
+                        <div className="filter-controlsgov">
+                            <div className="filter-groupgov">
+                                <label>Category:</label>
+                                <select
+                                    value={selectedCategory}
+                                    onChange={(e) => setSelectedCategory(e.target.value)}
+                                    className="filter-selectgov"
+                                >
+                                    {uniqueCategories.map(category => (
+                                        <option key={category} value={category}>{category}</option>
                                     ))}
-                                </div>
-
-                                <div className="job-footergov">
-                                    <Link to={`/job/${job.id}`} className="apply-btngov">
-                                        View Details →
-                                    </Link>
-                                </div>
+                                </select>
                             </div>
+
+                            <div className="filter-groupgov">
+                                <label>Qualification:</label>
+                                <select
+                                    value={selectedQualification}
+                                    onChange={(e) => setSelectedQualification(e.target.value)}
+                                    className="filter-selectgov"
+                                >
+                                    {uniqueQualifications.map(qual => (
+                                        <option key={qual} value={qual}>{qual}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <button
+                                className="reset-btngov"
+                                onClick={() => {
+                                    setSearchTerm('');
+                                    setSelectedCategory('All');
+                                    setSelectedQualification('All');
+                                }}
+                            >
+                                Reset Filters
+                            </button>
                         </div>
-                    ))
-                ) : (
-                    <div className="no-resultsgov">
-                        <h3>No matching jobs found</h3>
-                        <p>Try adjusting your search or filter criteria</p>
-                        <button
-                            className="reset-btngov"
-                            onClick={() => {
-                                setSearchTerm('');
-                                setSelectedCategory('All');
-                                setSelectedQualification('All');
-                            }}
-                        >
-                            Clear Filters
-                        </button>
                     </div>
                 )}
             </div>
+
+            {/* Jobs Grid */}
+            {currentData?.jobs?.length > 0 ? (
+                <div className="jobs-gridgov">
+                    {currentJobs.length > 0 ? (
+                        currentJobs.map((job) => (
+                            <div key={job.id} className="job-cardgov">
+                                {job.image?.url && (
+                                    <div className="job-imagegov">
+                                        <img
+                                            src={job.image.url}
+                                            alt={job.image.alt || job.title}
+                                            loading="lazy"
+                                            onError={(e) => {
+                                                e.target.src = 'https://via.placeholder.com/300x200?text=No+Image';
+                                            }}
+                                        />
+                                        {job.details?.noExamRequired && (
+                                            <span className="badgegov no-examgov">📝 No Exam</span>
+                                        )}
+                                    </div>
+                                )}
+
+                                <div className="job-contentgov">
+                                    <h2 className="job-titlegov">
+                                        <Link to={`/job/${job.id}?type=${activeTab}`}>
+                                            {job.title?.replace(/\n/g, ' ')}
+                                        </Link>
+                                    </h2>
+
+                                    <div className="job-metagov">
+                                        <span className="meta-itemgov">
+                                            <span className="meta-icongov">📅</span>
+                                            {formatDate(job.metadata?.publishedDate)}
+                                        </span>
+                                        <span className="meta-itemgov">
+                                            <span className="meta-icongov">👤</span>
+                                            {job.metadata?.author}
+                                        </span>
+                                        {job.details?.qualification && (
+                                            <span className="meta-itemgov">
+                                                <span className="meta-icongov">🎓</span>
+                                                {job.details.qualification}
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    <div className="job-categoriesgov">
+                                        {job.categories && job.categories.map((category, index) => (
+                                            <span
+                                                key={index}
+                                                className="category-taggov"
+                                                onClick={() => setSelectedCategory(category)}
+                                            >
+                                                {category}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    <div className="job-footergov">
+                                        <Link 
+                                            to={`/job/${job.id}?type=${activeTab}`} 
+                                            className="apply-btngov"
+                                        >
+                                            View Details →
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="no-resultsgov">
+                            <h3>No matching jobs found</h3>
+                            <p>Try adjusting your search or filter criteria</p>
+                            <button
+                                className="reset-btngov"
+                                onClick={() => {
+                                    setSearchTerm('');
+                                    setSelectedCategory('All');
+                                    setSelectedQualification('All');
+                                }}
+                            >
+                                Clear Filters
+                            </button>
+                        </div>
+                    )}
+                </div>
+            ) : (
+                <div className="jobs-empty">
+                    <h2>No Jobs Available in {activeTab}</h2>
+                    <p>Check back later for new government job opportunities in this category.</p>
+                </div>
+            )}
 
             {/* Pagination */}
             {filteredJobs.length > jobsPerPage && (

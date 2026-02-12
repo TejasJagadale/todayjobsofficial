@@ -1,383 +1,316 @@
-/* Govtjobs.css */
-
-.govt-jobs-containergov {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+/* ===============================
+   ROOT VARIABLES
+================================ */
+:root {
+    --primary: #0b5ed7;
+    --secondary: #198754;
+    --danger: #dc3545;
+    --bg: #f4f6f9;
+    --card-bg: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --radius: 14px;
 }
 
-/* Loading State */
-.jobs-loading {
+/* ===============================
+   GLOBAL
+================================ */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ===============================
+   LOADING / ERROR
+================================ */
+.jobs-loading,
+.jobs-error,
+.jobs-empty {
+    min-height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 400px;
+    text-align: center;
 }
 
 .loader {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #2563eb;
+    width: 42px;
+    height: 42px;
+    border: 4px solid #ddd;
+    border-top-color: var(--primary);
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
     animation: spin 1s linear infinite;
-    margin-bottom: 1rem;
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
+    to {
         transform: rotate(360deg);
     }
 }
 
-/* Error State */
-.jobs-error {
-    text-align: center;
-    padding: 3rem;
-    background: #fee2e2;
-    border-radius: 12px;
-    color: #dc2626;
+/* ===============================
+   MAIN CONTAINER
+================================ */
+.govt-jobs-containergov {
+    max-width: 1200px;
+    margin: auto;
+    padding: 14px;
 }
 
-.retry-btn {
-    background: #dc2626;
-    color: white;
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 6px;
-    font-size: 1rem;
+/* ===============================
+   TABS
+================================ */
+.tabs-containergov {
+    margin-bottom: 16px;
+}
+
+.tabs-headergov {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.tabs-headergov::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-btngov {
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: #fff;
     cursor: pointer;
-    margin-top: 1rem;
-    transition: background 0.3s;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
-.retry-btn:hover {
-    background: #b91c1c;
+.tab-btngov.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
 }
 
-/* Header Section */
+/* ===============================
+   HEADER
+================================ */
 .jobs-headergov {
-    margin-bottom: 2rem;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
 }
 
 .header-titlegov h1 {
-    font-size: 2rem;
-    color: #1e293b;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    margin-bottom: 6px;
 }
 
 .job-statsgov {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #64748b;
-    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.85rem;
+    color: var(--muted);
 }
 
-.total-jobsgov {
-    background: #2563eb;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-/* Filter Section */
+/* ===============================
+   SEARCH & FILTERS
+================================ */
 .filter-sectiongov {
-    background: #f8fafc;
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
+    margin-top: 16px;
 }
 
 .search-boxgov {
-    margin-bottom: 1rem;
+    margin-bottom: 12px;
 }
 
 .search-inputgov {
     width: 100%;
-    padding: 0.75rem 1rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-}
-
-.search-inputgov:focus {
-    outline: none;
-    border-color: #2563eb;
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
 }
 
 .filter-controlsgov {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-end;
-    flex-wrap: wrap;
-}
-
-.filter-groupgov {
-    flex: 1;
-    min-width: 200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
 }
 
 .filter-groupgov label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 4px;
     display: block;
-    margin-bottom: 0.5rem;
-    color: #475569;
-    font-size: 0.9rem;
-    font-weight: 600;
 }
 
 .filter-selectgov {
     width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 6px;
-    background: white;
-    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 0.85rem;
 }
 
 .reset-btngov {
-    background: #64748b;
-    color: white;
+    padding: 10px;
+    border-radius: 8px;
     border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
+    background: var(--danger);
+    color: #fff;
+    font-size: 0.85rem;
     cursor: pointer;
-    transition: background 0.3s;
-    white-space: nowrap;
 }
 
-.reset-btngov:hover {
-    background: #475569;
-}
-
-/* Stats Summary */
-.stats-summarygov {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.stat-cardgov {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.stat-valuegov {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.stat-labelgov {
-    font-size: 0.9rem;
-    opacity: 0.9;
-}
-
-/* Jobs Grid */
+/* ===============================
+   JOB GRID
+================================ */
 .jobs-gridgov {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
 }
 
+/* ===============================
+   JOB CARD
+================================ */
 .job-cardgov {
-    background: white;
-    border-radius: 12px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid #e2e8f0;
-}
-
-.job-cardgov:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
 }
 
 .job-imagegov {
     position: relative;
-    height: 200px;
-    overflow: hidden;
 }
 
 .job-imagegov img {
     width: 100%;
-    height: 100%;
+    height: 180px;
     object-fit: cover;
-    transition: transform 0.3s;
-}
-
-.job-cardgov:hover .job-imagegov img {
-    transform: scale(1.05);
 }
 
 .badgegov {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: #059669;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
+    top: 10px;
+    left: 10px;
+    background: var(--secondary);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
     font-weight: 600;
 }
 
 .job-contentgov {
-    padding: 1rem;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .job-titlegov {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
     line-height: 1.4;
 }
 
 .job-titlegov a {
-    color: #1e293b;
-    text-decoration: none;
-    transition: color 0.3s;
-    font-size: 1rem;
+    color: black;
 }
 
 .job-titlegov a:hover {
-    color: #2563eb;
+    color: var(--primary);
+    text-decoration: underline;
 }
 
 .job-metagov {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    color: #64748b;
-    font-size: 0.9rem;
-}
-
-.meta-itemgov {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.job-detailsgov {
-    background: #f8fafc;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-}
-
-.detail-itemgov {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-}
-
-.detail-itemgov:last-child {
-    margin-bottom: 0;
-}
-
-.detail-labelgov {
-    color: #475569;
-    font-weight: 600;
-}
-
-.detail-valuegov {
-    color: #1e293b;
-}
-
-.detail-valuegov.salary {
-    color: #059669;
-    font-weight: 600;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 10px;
 }
 
 .job-categoriesgov {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    gap: 6px;
+    margin-bottom: auto;
 }
 
 .category-taggov {
-    background: #e2e8f0;
-    color: #475569;
-    padding: 0.25rem 0.75rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
+    background: #eef2ff;
+    color: #3730a3;
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 0.7rem;
     cursor: pointer;
-    transition: all 0.3s;
-}
-
-.category-taggov:hover {
-    background: #2563eb;
-    color: white;
 }
 
 .job-footergov {
-    display: flex;
-    justify-content: flex-end;
+    margin-top: 12px;
 }
 
 .apply-btngov {
-    background: #2563eb;
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 1.5rem;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: background 0.3s;
-}
-
-.apply-btngov:hover {
-    background: #1d4ed8;
-}
-
-/* No Results */
-.no-resultsgov {
-    grid-column: 1 / -1;
+    display: inline-block;
+    width: 100%;
     text-align: center;
-    padding: 3rem;
-    background: #f8fafc;
-    border-radius: 12px;
-    color: #64748b;
+    padding: 10px;
+    border-radius: var(--radius);
+    background: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
 }
 
-/* Pagination */
+/* ===============================
+   NO RESULTS
+================================ */
+.no-resultsgov {
+    text-align: center;
+    padding: 30px;
+}
+
+/* ===============================
+   PAGINATION
+================================ */
 .paginationgov {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
+    gap: 10px;
+    margin: 30px 0;
 }
 
 .pagination-btngov {
-    background: white;
-    border: 2px solid #e2e8f0;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #fff;
     cursor: pointer;
-    transition: all 0.3s;
-}
-
-.pagination-btngov:hover:not(:disabled) {
-    background: #2563eb;
-    color: white;
-    border-color: #2563eb;
+    font-size: 0.85rem;
 }
 
 .pagination-btngov:disabled {
@@ -387,62 +320,40 @@
 
 .page-numbersgov {
     display: flex;
-    gap: 0.5rem;
+    gap: 6px;
 }
 
 .page-btngov {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #e2e8f0;
-    background: white;
+    padding: 6px 10px;
     border-radius: 6px;
+    border: 1px solid var(--border);
+    background: #fff;
+    font-size: 0.8rem;
     cursor: pointer;
-    transition: all 0.3s;
-}
-
-.page-btngov:hover {
-    background: #e2e8f0;
 }
 
 .page-btngov.active {
-    background: #2563eb;
-    color: white;
-    border-color: #2563eb;
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
 }
 
-/* Responsive Design */
+/* ===============================
+   RESPONSIVE
+================================ */
 @media (max-width: 768px) {
-    .govt-jobs-containergov {
-        padding: 1rem;
-    }
-
     .header-titlegov h1 {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
 
-    .job-statsgov {
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: flex-start;
+    .job-imagegov img {
+        height: 160px;
     }
 
-    .filter-controlsgov {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .filter-groupgov {
-        min-width: 100%;
-    }
-
-    .jobs-gridgov {
-        grid-template-columns: 1fr;
-    }
-
-    .paginationgov {
-        flex-wrap: wrap;
+    .tabs-headergov {
+        position: sticky;
+        top: 0;
+        background: var(--bg);
+        z-index: 10;
     }
 }
