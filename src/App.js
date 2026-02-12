@@ -23,6 +23,8 @@ import ForgotPassword from "./components/auth/ForgotPassword";
 import ResetPassword from "./components/auth/ResetPassword";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsConditions from "./components/TermsConditions";
+import Govtjobs from "./components/Govtjobs";
+import GovtJobDetails from "./components/GovtJobDetails";
 
 /* =========================
    AUTH CHECK
@@ -124,6 +126,15 @@ function AnimatedRoutes() {
         <Route
           path="/jobs"
           element={isAuth ? <Jobs /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/govtjobs"
+          element={isAuth ? <Govtjobs /> : <Navigate to="/login" />}
+        />
+
+        <Route
+          path="/job/:postId"
+          element={isAuth ? <GovtJobDetails /> : <Navigate to="/login" />}
         />
 
         <Route

@@ -16,7 +16,6 @@ const Navbar = () => {
 
   const user = JSON.parse(localStorage.getItem("user")) || {};
 
-
   return (
     <nav className="navbar">
       {/* Left */}
@@ -34,6 +33,11 @@ const Navbar = () => {
         <li>
           <NavLink to="/jobs" onClick={() => setMenuOpen(false)}>
             <FiBriefcase /> Jobs
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/govtjobs" onClick={() => setMenuOpen(false)}>
+            <FiBriefcase /> Govt Jobs
           </NavLink>
         </li>
         <li>

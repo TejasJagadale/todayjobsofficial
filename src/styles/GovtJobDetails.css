@@ -1,0 +1,521 @@
+/* GovtJobDetails.css */
+
+.job-details-containergovd {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Loading and Error States */
+.job-details-loadinggovd,
+.job-details-errorgovd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Header Section */
+.details-headergovd {
+  margin-bottom: 2rem;
+}
+
+.back-btngovd {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.2rem;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  color: #495057;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.back-btngovd:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+/* Title Section */
+.title-sectiongovd {
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  padding: 2rem;
+  border-radius: 16px;
+  color: black;
+  margin-bottom: 2rem;
+}
+
+.job-titlegovd {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.job-metagovd {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.meta-itemgovd {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+}
+
+/* Card Component */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.8rem;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+}
+
+.card h3 {
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 0.8rem;
+}
+
+/* Quick Info Grid */
+.quick-info-gridgovd {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.info-cardgovd {
+  background: white;
+  padding: 1.2rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #667eea;
+}
+
+.info-cardgovd.highlight {
+  border-left-color: #e53e3e;
+  background: #fff5f5;
+}
+
+.info-icongovd {
+  font-size: 2rem;
+}
+
+.info-contentgovd {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-labelgovd {
+  font-size: 0.85rem;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-valuegovd {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* Age Limit Section */
+.age-limit-sectiongovd .age-detailsgovd {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.age-rangegovd {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.age-labelgovd {
+  font-weight: 600;
+  color: #4a5568;
+  min-width: 120px;
+}
+
+.age-valuegovd {
+  color: #2d3748;
+}
+
+.age-descriptiongovd {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+/* Tabs Navigation */
+.tabs-containergovd {
+  margin-top: 2rem;
+}
+
+.tabs-navgovd {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+.tab-btngovd {
+  padding: 0.8rem 1.5rem;
+  background: none;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  color: #718096;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab-btngovd:hover:not(:disabled) {
+  color: #667eea;
+  background: #f7fafc;
+}
+
+.tab-btngovd.active {
+  color: #667eea;
+  background: #ebf4ff;
+}
+
+.tab-btngovd.active::after {
+  content: '';
+  position: absolute;
+  bottom: -0.7rem;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #667eea;
+}
+
+.tab-btngovd:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Tables */
+.table-responsivegovd {
+  overflow-x: auto;
+}
+
+.data-tablegovd,
+.details-tablegovd {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.data-tablegovd th,
+.details-tablegovd th,
+.data-tablegovd td,
+.details-tablegovd td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.data-tablegovd th {
+  background: #f7fafc;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.details-tablegovd .label {
+  width: 40%;
+  font-weight: 600;
+  color: #4a5568;
+  background: #f7fafc;
+}
+
+.vacancy-countgovd {
+  font-weight: 600;
+  color: #e53e3e;
+}
+
+/* Tags */
+.tags-containergovd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.category-taggovd {
+  padding: 0.4rem 1rem;
+  background: #ebf4ff;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+/* Links Grid */
+.links-gridgovd {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.link-btngovd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #2d3748;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.link-btngovd:hover {
+  background: #ebf4ff;
+  border-color: #667eea;
+  transform: translateY(-2px);
+}
+
+.link-btngovd.website {
+  background: #ebf8ff;
+  border-color: #4299e1;
+}
+
+.link-btngovd.notification {
+  background: #fffaf0;
+  border-color: #ed8936;
+}
+
+/* Social Links */
+.social-links-gridgovd {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.social-linkgovd {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.social-linkgovd.whatsapp {
+  background: #25D366;
+}
+
+.social-linkgovd.telegram {
+  background: #0088cc;
+}
+
+.social-linkgovd.instagram {
+  background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+}
+
+.social-linkgovd:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Related Jobs */
+.related-jobs-gridgovd {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.related-job-cardgovd {
+  padding: 1rem;
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.related-job-cardgovd:hover {
+  background: #ebf4ff;
+  border-color: #667eea;
+  transform: translateY(-2px);
+}
+
+.related-job-titlegovd {
+  color: #2d3748;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.view-linkgovd {
+  color: #667eea;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Free Application Badge */
+.free-applicationgovd {
+  background: #f0fff4;
+  border: 2px solid #48bb78;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.free-badgegovd {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: #48bb78;
+  color: white;
+  border-radius: 30px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Selection Badge */
+.selection-badgegovd {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.selection-badgegovd .badge {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  background: #805ad5;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+/* External Link Icon */
+.external-linkgovd {
+  color: #667eea;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.external-linkgovd:hover {
+  text-decoration: underline;
+}
+
+.link-icongovd {
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .job-titlegovd {
+    font-size: 1.1rem;
+  }
+
+  .card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    margin-top: 0;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 0.8rem;
+  }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .quick-info-gridgovd {
+    grid-template-columns: 1fr;
+  }
+
+  .tabs-navgovd {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow: scroll;
+  }
+
+  .tab-btngovd {
+    width: 100%;
+    text-align: center;
+  }
+
+  .tab-btngovd.active::after {
+    display: none;
+  }
+
+  .social-links-gridgovd {
+    grid-template-columns: 1fr;
+  }
+
+  .job-metagovd {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .title-sectiongovd {
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+    padding: 0rem;
+    border-radius: 16px;
+    color: black;
+    margin-bottom: 1rem;
+  }
+
+  .info-cardgovd {
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+}

@@ -15,6 +15,29 @@ const Home = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const [keyword, setKeyword] = useState("");
+  const [location, setLocation] = useState("");
+  const [searchClicked, setSearchClicked] = useState(false);
+
+  const normalizeText = (text) => text.toLowerCase().replace(/\s+/g, "");
+
+  const filteredJobs = jobs.filter((job) => {
+
+    if (!searchClicked) return true;
+
+    const cleanKeyword = normalizeText(keyword);
+    const cleanLocation = normalizeText(location);
+
+    const matchKeyword =
+      normalizeText(job.role || "").includes(cleanKeyword) ||
+      normalizeText(job.company_name || "").includes(cleanKeyword);
+
+    const matchLocation = normalizeText(job.location || "").includes(cleanLocation);
+    
+    return matchKeyword && matchLocation;
+  });
+
+
   /* FETCH JOBS */
   useEffect(() => {
     const fetchJobs = async () => {
@@ -83,12 +106,20 @@ const Home = () => {
         <div className="search-box">
           <div className="input-group">
             <img className="icon" src="/assets/ri_search-line.png" alt="" />
-            <input type="text" placeholder="Job Title, Keywords, or Company" />
+            <input type="text" placeholder="Job Title, Keywords, or Company" value={keyword}
+              onChange={(e) => {
+                setKeyword(e.target.value);
+                setSearchClicked(false);
+              }} />
           </div>
 
           <div className="input-group">
             <img className="icon" src="/assets/Frame (6).png" alt="" />
-            <input type="text" placeholder="Location" />
+            <input type="text" placeholder="Location" value={location}
+              onChange={(e) => {
+                setLocation(e.target.value);
+                setSearchClicked(false);
+              }} />
           </div>
 
           <div className="input-group">
@@ -100,7 +131,7 @@ const Home = () => {
             </select>
           </div>
 
-          <button className="search-btn">Search Jobs</button>
+          <button className="search-btn" onClick={() => setSearchClicked(true)}>Search Jobs</button>
         </div>
 
         <div className="stats">
@@ -135,7 +166,7 @@ const Home = () => {
         {error && <p>{error}</p>}
 
         <div className="jobs-grid">
-          {jobs.map((job) => (
+          {filteredJobs.map((job) => (
             <div className="job-card" key={job.id} onClick={() => navigate(`/jobsdetails/${job.id}`)}>
               <div className="job-cardimgsec">
                 <img className="cardimgsec" src="/assets/logomp.png" alt="" />
