@@ -74,11 +74,6 @@ const GovtJobDetails = () => {
         return jobDetails.qualifications_table.slice(1);
     };
 
-    // Get salary details
-    const getSalaryDetails = () => {
-        return jobDetails?.salary_table || [];
-    };
-
     if (loading) {
         return (
             <div className="job-details-loadinggovd">
