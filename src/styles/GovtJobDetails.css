@@ -105,6 +105,7 @@ body {
   gap: 12px;
   font-size: 0.85rem;
   color: var(--muted);
+  margin: 20px 0;
 }
 
 /* ===============================
@@ -347,5 +348,24 @@ body {
     top: 0;
     background: var(--bg);
     z-index: 10;
+    padding-top: 8px;
+  }
+
+  .age-rangegovd {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+  }
+
+  .description-text {
+    line-height: 1.7;
+    color: #374151;
+    font-size: 1rem;
+  }
+
+  .card,
+  .cardgovd {
+    overflow: scroll;
   }
 }

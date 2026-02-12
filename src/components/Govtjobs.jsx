@@ -364,7 +364,7 @@ const Govtjobs = () => {
                                             <span className="meta-icongov">📅</span>
                                             {formatDate(job.metadata?.publishedDate)}
                                         </span>
-                                        <span className="meta-itemgov">
+                                        {/* <span className="meta-itemgov">
                                             <span className="meta-icongov">👤</span>
                                             {job.metadata?.author}
                                         </span>
@@ -373,7 +373,7 @@ const Govtjobs = () => {
                                                 <span className="meta-icongov">🎓</span>
                                                 {job.details.qualification}
                                             </span>
-                                        )}
+                                        )} */}
                                     </div>
 
                                     <div className="job-categoriesgov">

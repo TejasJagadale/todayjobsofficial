@@ -137,9 +137,10 @@
     .fochil5 {
         display: flex;
         justify-content: space-between;
-        /* flex-direction: column; */
+        flex-direction: column;
         padding-top: 15px;
         gap: 10px;
+        
     }
 
     .fochil5 p {

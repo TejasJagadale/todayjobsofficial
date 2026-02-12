@@ -116,7 +116,7 @@ const GovtJobDetails = () => {
                                 Published: {formatDate(jobDetails.metadata.published_date)}
                             </span>
                         )}
-                        {jobDetails.metadata?.author && (
+                        {/* {jobDetails.metadata?.author && (
                             <span className="meta-itemgovd">
                                 <span className="meta-icongovd">👤</span>
                                 Author: {jobDetails.metadata.author}
@@ -127,7 +127,7 @@ const GovtJobDetails = () => {
                                 <span className="meta-icongovd">🆔</span>
                                 Job ID: {jobDetails.metadata.post_id}
                             </span>
-                        )}
+                        )} */}
                     </div>
                 </div>
 
