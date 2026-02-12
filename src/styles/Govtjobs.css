@@ -356,4 +356,18 @@ a {
         background: var(--bg);
         z-index: 10;
     }
+
+    .jobs-gridgov {
+        grid-gap: 16px;
+        display: grid;
+        gap: 30px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        padding: 10px;
+    }
+
+    .job-cardgov {
+        background: #fff;
+        background: var(--card-bg);
+        border-radius: 10px;
+    }
 }
