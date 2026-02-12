@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Govtjobs.css';
 
@@ -25,8 +25,8 @@ const Govtjobs = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const jobsPerPage = 10;
 
-    // Tab configuration
-    const tabs = [
+    // Tab configuration - memoized to prevent unnecessary re-renders
+    const tabs = useMemo(() => [
         { id: 'TN Govt Jobs', label: '🎯 TN Govt Jobs', jsonFile: 'alljson.json' },
         { id: '12TH PASS Govt Jobs', label: '📚 12th Pass Jobs', jsonFile: '12th_pass_jobs.json' },
         { id: '10TH PASS Govt Jobs', label: '📖 10th Pass Jobs', jsonFile: '10th_pass_jobs.json' },
@@ -34,10 +34,10 @@ const Govtjobs = () => {
         { id: 'ANY DEGREE GOVT JOBS', label: '🎓 Any Degree Jobs', jsonFile: 'degree_jobs.json' },
         { id: 'DIPLOMA GOVT JOBS', label: '🔧 Diploma Jobs', jsonFile: 'diploma_jobs.json' },
         { id: 'ITI GOV JOBS', label: '🛠️ ITI Jobs', jsonFile: 'iti_jobs.json' }
-    ];
+    ], []);
 
-    // Function to get current job data based on active tab
-    const getCurrentJobData = () => {
+    // Memoized function to get current job data based on active tab
+    const getCurrentJobData = useCallback(() => {
         switch(activeTab) {
             case 'TN Govt Jobs':
                 return tnGovtJobs;
@@ -56,10 +56,10 @@ const Govtjobs = () => {
             default:
                 return tnGovtJobs;
         }
-    };
+    }, [activeTab, tnGovtJobs, pass12Jobs, pass10Jobs, centralGovtJobs, degreeJobs, diplomaJobs, itiJobs]);
 
-    // Function to set job data for specific tab
-    const setJobDataForTab = (tabId, data) => {
+    // Function to set job data for specific tab - memoized with useCallback
+    const setJobDataForTab = useCallback((tabId, data) => {
         switch(tabId) {
             case 'TN Govt Jobs':
                 setTnGovtJobs(data);
@@ -85,7 +85,7 @@ const Govtjobs = () => {
             default:
                 break;
         }
-    };
+    }, []);
 
     // Load JSON data for all tabs
     useEffect(() => {
@@ -120,7 +120,7 @@ const Govtjobs = () => {
         };
 
         fetchAllJobs();
-    }, []);
+    }, [tabs, setJobDataForTab]); // Added tabs and setJobDataForTab as dependencies
 
     // Update filtered jobs when active tab changes or any job data updates
     useEffect(() => {
@@ -134,7 +134,7 @@ const Govtjobs = () => {
         setSearchTerm('');
         setSelectedCategory('All');
         setSelectedQualification('All');
-    }, [activeTab, tnGovtJobs, pass12Jobs, pass10Jobs, centralGovtJobs, degreeJobs, diplomaJobs, itiJobs]);
+    }, [activeTab, getCurrentJobData]); // Added getCurrentJobData as dependency
 
     // Filter jobs based on search, category, and qualification
     useEffect(() => {
@@ -168,8 +168,12 @@ const Govtjobs = () => {
 
         setFilteredJobs(filtered);
         setCurrentPage(1);
-    }, [searchTerm, selectedCategory, selectedQualification, activeTab, 
-        tnGovtJobs, pass12Jobs, pass10Jobs, centralGovtJobs, degreeJobs, diplomaJobs, itiJobs]);
+    }, [
+        searchTerm, 
+        selectedCategory, 
+        selectedQualification, 
+        getCurrentJobData
+    ]); // Added getCurrentJobData as dependency
 
     // Get current page jobs
     const indexOfLastJob = currentPage * jobsPerPage;
@@ -177,8 +181,8 @@ const Govtjobs = () => {
     const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
     const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
 
-    // Extract unique categories and qualifications for current tab
-    const getUniqueCategories = () => {
+    // Extract unique categories and qualifications for current tab - memoized
+    const uniqueCategories = useMemo(() => {
         const currentData = getCurrentJobData();
         if (!currentData?.jobs) return ['All'];
         const categories = new Set();
@@ -188,9 +192,9 @@ const Govtjobs = () => {
             }
         });
         return ['All', ...Array.from(categories).sort()];
-    };
+    }, [getCurrentJobData]);
 
-    const getUniqueQualifications = () => {
+    const uniqueQualifications = useMemo(() => {
         const currentData = getCurrentJobData();
         if (!currentData?.jobs) return ['All'];
         const qualifications = new Set();
@@ -200,25 +204,20 @@ const Govtjobs = () => {
             }
         });
         return ['All', ...Array.from(qualifications).sort()];
-    };
+    }, [getCurrentJobData]);
 
-    // Format salary display
-    const formatSalary = (salary) => {
-        if (!salary || salary === 'Not specified') return 'Not disclosed';
-        return salary.replace(/\./g, '₹').trim();
-    };
 
-    // Format date display
-    const formatDate = (dateString) => {
+    // Format date display - memoized
+    const formatDate = useCallback((dateString) => {
         if (!dateString) return 'Date not available';
         return dateString.replace(/\n/g, '').trim();
-    };
+    }, []);
 
-    // Get current tab metadata
-    const getCurrentMetadata = () => {
+    // Get current tab metadata - memoized
+    const currentMetadata = useMemo(() => {
         const currentData = getCurrentJobData();
         return currentData?.metadata || {};
-    };
+    }, [getCurrentJobData]);
 
     if (loading) {
         return (
@@ -242,9 +241,6 @@ const Govtjobs = () => {
     }
 
     const currentData = getCurrentJobData();
-    const currentMetadata = getCurrentMetadata();
-    const uniqueCategories = getUniqueCategories();
-    const uniqueQualifications = getUniqueQualifications();
 
     return (
         <div className="govt-jobs-containergov">
