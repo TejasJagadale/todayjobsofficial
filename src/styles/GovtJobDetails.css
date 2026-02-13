@@ -176,12 +176,28 @@ body {
   margin-top: 20px;
 }
 
+.header-titlegov{
+  display: flex;
+  justify-content: space-between;
+}
+
 .tabs-navgovd {
   display: flex;
   gap: 8px;
   overflow-x: auto;
   padding-bottom: 8px;
+  margin-bottom: 18px;
   border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+  padding-top: 8px;
+}
+
+.view-linkgovd:hover {
+  text-decoration: underline;
+  color: #2563eb;
 }
 
 .tabs-navgovd::-webkit-scrollbar {
@@ -248,6 +264,12 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.application-linksgovd h3, .social-links-sectiongovd h3, .related-jobs-sectiongovd h3, .cardgovd h3, .description-sectiongovd h2, .qualifications-tabgovd h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .category-taggovd {
@@ -324,11 +346,20 @@ body {
   text-decoration: none;
   color: var(--text);
   /* border-left: 4px solid var(--primary); */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.social-icongovd {
+  display: flex;
 }
 
 .related-job-titlegovd {
   font-weight: 600;
   margin-bottom: 6px;
+  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 /* ===============================

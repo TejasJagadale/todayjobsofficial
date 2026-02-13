@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import {
+    FaWhatsapp,
+    FaTelegramPlane,
+    FaInstagram,
+    FaFacebookF,
+    FaTwitter,
+    FaYoutube,
+    FaLink
+} from "react-icons/fa";
+
 import '../styles/GovtJobDetails.css';
+import { FaMobileScreen } from 'react-icons/fa6';
+import { IoDocumentOutline, IoSearch } from 'react-icons/io5';
+import { HiCurrencyRupee } from 'react-icons/hi';
+import { TbFileDescription } from 'react-icons/tb';
 
 const GovtJobDetails = () => {
     const { postId } = useParams();
@@ -116,25 +130,14 @@ const GovtJobDetails = () => {
                                 Published: {formatDate(jobDetails.metadata.published_date)}
                             </span>
                         )}
-                        {/* {jobDetails.metadata?.author && (
-                            <span className="meta-itemgovd">
-                                <span className="meta-icongovd">👤</span>
-                                Author: {jobDetails.metadata.author}
-                            </span>
-                        )}
-                        {jobDetails.metadata?.post_id && (
-                            <span className="meta-itemgovd">
-                                <span className="meta-icongovd">🆔</span>
-                                Job ID: {jobDetails.metadata.post_id}
-                            </span>
-                        )} */}
+
                     </div>
                 </div>
 
                 {/* Description */}
                 {jobDetails.description && (
                     <div className="description-sectiongovd card">
-                        <h2>📋 Job Description</h2>
+                        <h2><TbFileDescription /> Job Description</h2>
                         <p className="description-text">{jobDetails.description}</p>
                     </div>
                 )}
@@ -253,7 +256,7 @@ const GovtJobDetails = () => {
                         {activeTab === 'overview' && (
                             <div className="overview-tabgovd">
                                 <div className="job-details-tablegovd card">
-                                    <h3>📊 Complete Job Details</h3>
+                                    <h3><TbFileDescription /> Complete Job Details</h3>
                                     <table className="details-tablegovd">
                                         <tbody>
                                             {Object.entries(jobDetails.job_details_table || {}).map(([key, value]) => {
@@ -336,7 +339,7 @@ const GovtJobDetails = () => {
                         {/* Qualifications Tab */}
                         {activeTab === 'qualifications' && (
                             <div className="qualifications-tabgovd card">
-                                <h3>📚 Educational Qualifications</h3>
+                                <h3><TbFileDescription/> Educational Qualifications</h3>
                                 {getQualifications().length > 0 ? (
                                     <div className="table-responsivegovd">
                                         <table className="data-tablegovd">
@@ -381,7 +384,7 @@ const GovtJobDetails = () => {
                                 {/* Application Fee */}
                                 {jobDetails.application_fee && (
                                     <div className="cardgovd">
-                                        <h3>💰 Application Fee</h3>
+                                        <h3><HiCurrencyRupee /> Application Fee</h3>
                                         {jobDetails.application_fee.is_free ? (
                                             <div className="free-applicationgovd">
                                                 <span className="free-badgegovd">✓ FREE APPLICATION</span>
@@ -395,7 +398,7 @@ const GovtJobDetails = () => {
 
                                 {/* How to Apply Instructions */}
                                 <div className="cardgovd">
-                                    <h3>📨 How to Apply</h3>
+                                    <h3><IoDocumentOutline /> How to Apply</h3>
                                     {getDetailValue('field_mn7um') && (
                                         <div className="apply-instructionsgovd">
                                             <p><strong>Application Mode:</strong> {getDetailValue('field_mn7um').value}</p>
@@ -409,7 +412,7 @@ const GovtJobDetails = () => {
                                 {/* Important Links */}
                                 {jobDetails.application_links_table && (
                                     <div className="application-linksgovd card">
-                                        <h3>🔗 Important Links</h3>
+                                        <h3><FaLink /> Important Links</h3>
                                         <div className="links-gridgovd">
                                             {jobDetails.application_links_table.official_website && (
                                                 <a
@@ -442,17 +445,16 @@ const GovtJobDetails = () => {
                 {/* Social Media Links */}
                 {jobDetails.social_media_links && jobDetails.social_media_links.length > 0 && (
                     <div className="social-links-sectiongovd card">
-                        <h3>📱 Join Our Channels</h3>
+                        <h3><FaMobileScreen /> Join Our Channels</h3>
                         <div className="social-links-gridgovd">
                             {jobDetails.social_media_links
                                 .filter((link, index, self) =>
-                                    // Remove duplicates based on platform and url
-                                    index === self.findIndex(l =>
-                                        l.platform === link.platform && l.url === link.url
+                                    index === self.findIndex(
+                                        l => l.platform === link.platform && l.url === link.url
                                     )
                                 )
                                 .map((link, index) => (
-                                    link.platform !== 'unknown' && (
+                                    link.platform !== "unknown" && (
                                         <a
                                             key={index}
                                             href={link.url}
@@ -461,27 +463,29 @@ const GovtJobDetails = () => {
                                             className={`social-linkgovd ${link.platform.toLowerCase()}`}
                                         >
                                             <span className="social-icongovd">
-                                                {link.platform === 'WhatsApp' && '📱'}
-                                                {link.platform === 'Telegram' && '📨'}
-                                                {link.platform === 'Instagram' && '📸'}
-                                                {link.platform === 'Facebook' && '📘'}
-                                                {link.platform === 'Twitter' && '🐦'}
-                                                {link.platform === 'YouTube' && '▶️'}
+                                                {link.platform === "WhatsApp" && <FaWhatsapp />}
+                                                {link.platform === "Telegram" && <FaTelegramPlane />}
+                                                {link.platform === "Instagram" && <FaInstagram />}
+                                                {link.platform === "Facebook" && <FaFacebookF />}
+                                                {link.platform === "Twitter" && <FaTwitter />}
+                                                {link.platform === "YouTube" && <FaYoutube />}
                                             </span>
+
                                             <span className="social-titlegovd">
-                                                {link.title.replace(/\n/g, ' ').trim()}
+                                                {link.title.replace(/\n/g, " ").trim()}
                                             </span>
                                         </a>
                                     )
                                 ))}
                         </div>
+
                     </div>
                 )}
 
                 {/* Related Jobs */}
                 {jobDetails.related_jobs && jobDetails.related_jobs.length > 0 && (
                     <div className="related-jobs-sectiongovd card">
-                        <h3>🔍 Related Jobs</h3>
+                        <h3><IoSearch /> Related Jobs</h3>
                         <div className="related-jobs-gridgovd">
                             {jobDetails.related_jobs.slice(0, 4).map((job, index) => (
                                 <a

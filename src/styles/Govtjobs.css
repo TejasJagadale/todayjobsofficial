@@ -116,7 +116,10 @@ a {
 
 .header-titlegov h1 {
     font-size: 1.4rem;
-    margin-bottom: 6px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
 }
 
 .job-statsgov {
@@ -230,7 +233,8 @@ a {
 .job-titlegov {
     font-size: 1rem;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 0px;
+    margin-top: 0px;
     line-height: 1.4;
 }
 
@@ -249,7 +253,7 @@ a {
     gap: 10px;
     font-size: 0.75rem;
     color: var(--muted);
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 .job-categoriesgov {

@@ -15,7 +15,7 @@
     min-width: 250px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 /* Logo + Description */
@@ -42,7 +42,7 @@
 /* Section Headings */
 .footer1 h1 {
     font-size: 20px;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     font-weight: 600;
 }
 
@@ -72,7 +72,7 @@
 .fochil3 {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 0px;
 }
 
 .fochil4 {
